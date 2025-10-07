@@ -58,7 +58,7 @@ export default function Home() {
             </div>
             
             
-            <div className="flex-1 flex flex-col justify-start">
+            <div className="flex-1 flex flex-col justify-start items-center">
               <p className="text-xl md:text-3xl">Ceremonia Religioasa | 3 PM</p>
               <p className="text-xl md:text-3xl">Petrecerea | 4:30 PM</p>
               <p >
@@ -67,7 +67,7 @@ export default function Home() {
             </button>
               </p>
               <Dialog onOpenChange={(open) => !open && resetDialog()}>
-                <DialogTrigger className="mt-6 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition">
+                <DialogTrigger className="mt-6 py-2 border-2 px-0 w-7/8  border-black rounded-full text-lg font-medium transition">
                   RSVP
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-lg">
