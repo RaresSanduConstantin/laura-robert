@@ -25,10 +25,11 @@ export const metadata: Metadata = {
     siteName: 'Laura & Robert - Hai la nunta!',
     images: [
       {
-        url: 'https://laura-robert.vercel.app/opengraph-image.jpeg',
+        url: '/opengraph-image.jpeg',
         width: 1200,
         height: 630,
         alt: 'Laura & Robert - Hai la nunta!',
+        type: 'image/jpeg',
       }
     ]
   }
