@@ -32,6 +32,12 @@ export const metadata: Metadata = {
         type: 'image/jpeg',
       }
     ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Laura & Robert - Hai la nunta!',
+    description: 'Invitatie nunta Laura & Robert - 17 Mai 2025',
+    images: ['https://laura-robert.vercel.app/opengraph-image.jpeg'],
   }
 };
 
