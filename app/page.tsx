@@ -44,27 +44,27 @@ export default function Home() {
         <div className="absolute text-center flex flex-col w-full h-screen uppercase">
           <div className="h-screen text-black flex flex-col justify-around items-center py-12">
             <div className="flex-1 flex flex-col justify-end">
-              <p className="text-lg md:text-3xl font-light">Ne face placere sa va invitam  <br /> la sarbatoarea iubirii noastre</p>
-              <h1 className="text-4xl md:text-8xl font-medium text-gray-800 mb-4 mt-8">
+              <p className="text-lg md:text-3xl font-light">Ne face plăcere să vă invităm  <br /> la sărbătoarea iubirii noastre</p>
+              <h1 className="text-5xl md:text-8xl font-medium text-gray-800 mb-4">
                 Laura & <br/> Robert
               </h1>
             </div>
             
-            <div className="flex-1 flex flex-col justify-center">
-            <div className="w-full md:w-xl h-0.5 bg-[#cfa987] mx-auto mb-9" />
-              <p className="text-xl md:text-3xl">Alaturi de nasii nostri</p>
-              <h2 className="text-3xl md:text-5xl">Oana & Ionut</h2>
+            <div className=" flex flex-col justify-center">
+            <div className="w-full md:w-xl h-0.5 bg-[#cfa987] mx-auto " />
+              <p className="text-lg md:text-3xl">Alături de nașii noștri</p>
+              <h2 className="text-2xl md:text-5xl">Oana & Ionuț</h2>
               <p className="mt-10 mb-2 font-bold text-2xl md:text-3xl">17 mai 2025</p>
-            <div className="w-full md:w-xl  h-0.5 bg-[#cfa987] mx-auto mt-9" />
+            <div className="w-full md:w-xl  h-0.5 bg-[#cfa987] mx-auto" />
+              <p className="text-xl md:text-3xl">Ceremonia Religioasă | 4 PM</p>
+              <p className="text-xl md:text-3xl">Petrecerea | 5:30 PM</p>
             </div>
             
             
             <div className="flex-1 flex flex-col justify-start items-center">
-              <p className="text-xl md:text-3xl">Ceremonia Religioasa | 3 PM</p>
-              <p className="text-xl md:text-3xl">Petrecerea | 4:30 PM</p>
               <p >
                 <button className='mt-2 px-6 py-2 border-2 border-black text-lg font-medium transition' >
-              <a href="https://maps.app.goo.gl/q4gStLihkbVpJ6kM7" target='_blank' className="text-xl font-bold"> Daimon Events, Bucuresti ←</a>
+              <a href="https://maps.app.goo.gl/q4gStLihkbVpJ6kM7" target='_blank' className="text-xl font-bold"> Daimon Events, București ←</a>
             </button>
               </p>
               <Dialog onOpenChange={(open) => !open && resetDialog()}>
@@ -74,30 +74,45 @@ export default function Home() {
                 <DialogContent className="sm:max-w-lg">
                   <DialogHeader>
                     <DialogTitle className="text-2xl">
-                      {rsvpResponse === 'no' ? 'Multumim pentru raspuns' : 'Dansam impreuna in mai?'}
+                      {rsvpResponse === 'no' ? 'Mulțumim pentru răspuns' : 'Dansăm împreună în Mai?'}
                     </DialogTitle>
                     <DialogDescription className="mt-4">
                       {rsvpResponse === 'no' 
-                        ? 'Ne pare rau ca nu puteti participa, va multumim pentru raspuns'
-                        : 'Ne dorim ca toata lumea sa se simta confortabil si sa se bucure de aceasta zi speciala alaturi de noi.'
+                        ? 'Ne pare rău că nu puteți participa, vă multumim pentru răspuns!'
+                        : 'Spune-ne dacă poți participa la evenimentul nostru!'
                       }
                     </DialogDescription>
                   </DialogHeader>
                   
                   {rsvpResponse === 'initial' && (
+                    <div className="flex flex-col">
+                        <div>
+                        <label className="block text-sm font-medium mb-1">Nume</label>
+                        <input
+                          type="text"
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
+                          placeholder="Numele dvs."
+                          required
+                        />
+                      </div>
                     <div className="flex gap-4 mt-6">
                       <button 
+                        disabled={!formData.name}
                         onClick={() => setRsvpResponse('yes')}
                         className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
                       >
                         Da
                       </button>
                       <button 
+                        disabled={formData.name.trim() === ''}
                         onClick={() => setRsvpResponse('no')}
                         className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
                       >
                         Nu
                       </button>
+                    </div>
                     </div>
                   )}
 
@@ -114,7 +129,7 @@ export default function Home() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Numarul de persoane</label>
+                        <label className="block text-sm font-medium mb-1">Numărul de persoane</label>
                         <input
                           type="number"
                           value={formData.numberOfPersons}
@@ -125,13 +140,13 @@ export default function Home() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Melodie preferata</label>
+                        <label className="block text-sm font-medium mb-1">Pe ce melodie dansăm împreună?</label>
                         <input
                           type="text"
                           value={formData.song}
                           onChange={(e) => setFormData({...formData, song: e.target.value})}
                           className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
-                          placeholder="Melodia pe care ati dori sa o ascultati"
+                          placeholder="Titlul și artistul"
                         />
                       </div>
                       <DialogClose asChild>
