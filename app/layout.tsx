@@ -15,18 +15,23 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://laura-robert.vercel.app/'),
   title: "Laura & Robert - Hai la nunta!",
   description: "Invitatie nunta Laura & Robert - 17 Mai 2025",
+  alternates: {
+    canonical: 'https://laura-robert.vercel.app/',
+  },
   openGraph: {
-    url: "https://laura-robert.vercel.app/",
-    images:[ '/opengraph-image.jpeg'],
     title: 'Laura & Robert - Hai la nunta!',
     description: 'Invitatie nunta Laura & Robert - 17 Mai 2025',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Laura & Robert - Hai la nunta!',
-    images: ['/opengraph-image.jpeg'],
+    url: "https://laura-robert.vercel.app/",
+    siteName: 'Laura & Robert - Hai la nunta!',
+    images: [
+      {
+        url: 'https://laura-robert.vercel.app/opengraph-image.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Laura & Robert - Hai la nunta!',
+      }
+    ]
   }
-  
 };
 
 export default function RootLayout({
