@@ -35,6 +35,7 @@ export default function Home() {
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="relative w-full h-screen  md:max-w-5xl mx-auto aspect-[3/4] overflow-hidden">
         <div className="absolute bg-[#fff4de] w-full h-screen  md:inset-0 "></div>
+        <div className="absolute  inset-0  bg-[url('/images/carton.svg')] bg-cover bg-center bg-no-repeat "></div>
         <div className="absolute inset-0 bg-[url('/images/flori.svg')] bg-cover bg-center bg-no-repeat">
         {/* mask */}
         {/* <div className="absolute inset-0 bg-[#fff4de] flower-clip md:hidden"></div> */}
