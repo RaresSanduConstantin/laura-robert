@@ -19,8 +19,14 @@ const lauraFontsRegular = fontPreferat({
   });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: "Laura & Robert - Hai la nunta!",
   description: "Invitatie nunta Laura & Robert - 17 Mai 2025",
+  openGraph: {
+    images: '/opengraph-image.png',
+    title: 'Laura & Robert - Hai la nunta!',
+    description: 'Invitatie nunta Laura & Robert - 17 Mai 2025',
+  },
   
 };
 
