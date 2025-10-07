@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -6,30 +6,69 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose
-} from "@/components/ui/dialog"
-import { useState } from "react"
+  DialogClose,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 export default function Home() {
-  const [rsvpResponse, setRsvpResponse] = useState<'initial' | 'yes' | 'no'>('initial')
+  const [rsvpResponse, setRsvpResponse] = useState<"initial" | "yes" | "no">(
+    "initial"
+  );
   const [formData, setFormData] = useState({
-    name: '',
-    numberOfPersons: '',
-    song: ''
-  })
+    name: "",
+    numberOfPersons: "",
+    song: "",
+  });
 
   const resetDialog = () => {
-    setRsvpResponse('initial')
-    setFormData({ name: '', numberOfPersons: '', song: '' })
-  }
+    setRsvpResponse("initial");
+    setFormData({ name: "", numberOfPersons: "", song: "" });
+  };
+
+  const handleNoAttending = () => {
+    setRsvpResponse("no");
+    handleSubmit();
+  };
 
   const handleSubmit = () => {
     // Handle form submission here
-    console.log('Form submitted:', formData)
-    // You can add your submission logic here
+    console.log("Form submitted:", formData);
 
-  }
 
+    try {
+      if (rsvpResponse === "no") {
+        const respone = fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            status: rsvpResponse === "no" ? "decline" : "accept",
+            numberOfPersons: 0,
+            song: "",
+          }),
+        });
+        console.log(respone);
+      } else {
+        const respone = fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            status: rsvpResponse === "yes" ? "accept" : "decline",
+            numberOfPersons: formData.numberOfPersons,
+            song: formData.song,
+          }),
+        });
+        console.log(respone);
+      }
+    } catch (error) {
+      console.log("Error submitting form:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
@@ -37,35 +76,46 @@ export default function Home() {
         <div className="absolute bg-[#fee5cf] w-full h-screen  md:inset-0 "></div>
         <div className="absolute  inset-0  bg-[url('/images/carton.svg')] bg-cover bg-center bg-no-repeat "></div>
         <div className="absolute inset-0 bg-[url('/images/flori.svg')] bg-cover bg-center bg-no-repeat">
-        {/* mask */}
-        {/* <div className="absolute inset-0 bg-[#fff4de] flower-clip md:hidden"></div> */}
+          {/* mask */}
+          {/* <div className="absolute inset-0 bg-[#fff4de] flower-clip md:hidden"></div> */}
         </div>
 
         <div className="absolute text-center flex flex-col w-full h-screen uppercase">
           <div className="h-screen text-black flex flex-col justify-around items-center py-12">
             <div className="flex-1 flex flex-col justify-end">
-              <p className="text-lg md:text-3xl font-light">Ne face plăcere să vă invităm  <br /> la sărbătoarea iubirii noastre</p>
+              <p className="text-lg md:text-3xl font-light">
+                Ne face plăcere să vă invităm <br /> la sărbătoarea iubirii
+                noastre
+              </p>
               <h1 className="text-5xl md:text-8xl font-medium text-gray-800 mb-4">
-                Laura & <br/> Robert
+                Laura & <br /> Robert
               </h1>
             </div>
-            
+
             <div className=" flex flex-col justify-center">
-            <div className="w-full md:w-xl h-0.5 bg-[#cfa987] mx-auto " />
+              <div className="w-full md:w-xl h-0.5 bg-[#cfa987] mx-auto " />
               <p className="text-lg md:text-3xl">Alături de nașii noștri</p>
               <h2 className="text-2xl md:text-5xl">Oana & Ionuț</h2>
-              <p className="mt-10 mb-2 font-bold text-2xl md:text-3xl">17 mai 2025</p>
-            <div className="w-full md:w-xl  h-0.5 bg-[#cfa987] mx-auto" />
+              <p className="mt-10 mb-2 font-bold text-2xl md:text-3xl">
+                17 mai 2025
+              </p>
+              <div className="w-full md:w-xl  h-0.5 bg-[#cfa987] mx-auto" />
               <p className="text-xl md:text-3xl">Ceremonia Religioasă | 4 PM</p>
               <p className="text-xl md:text-3xl">Petrecerea | 5:30 PM</p>
             </div>
-            
-            
+
             <div className="flex-1 flex flex-col justify-start items-center">
-              <p >
-                <button className='mt-2 px-6 py-2 border-2 border-black text-lg font-medium transition' >
-              <a href="https://maps.app.goo.gl/q4gStLihkbVpJ6kM7" target='_blank' className="text-xl font-bold"> Daimon Events, București ←</a>
-            </button>
+              <p>
+                <button className="mt-2 px-6 py-2 border-2 border-black text-lg font-medium transition">
+                  <a
+                    href="https://maps.app.goo.gl/q4gStLihkbVpJ6kM7"
+                    target="_blank"
+                    className="text-xl font-bold"
+                  >
+                    {" "}
+                    Daimon Events, București ←
+                  </a>
+                </button>
               </p>
               <Dialog onOpenChange={(open) => !open && resetDialog()}>
                 <DialogTrigger className="mt-6 py-2 border-2 px-0 w-7/8  border-black rounded-full text-lg font-medium transition">
@@ -74,103 +124,127 @@ export default function Home() {
                 <DialogContent className="sm:max-w-lg">
                   <DialogHeader>
                     <DialogTitle className="text-2xl">
-                      {rsvpResponse === 'no' ? 'Mulțumim pentru răspuns' : 'Dansăm împreună în Mai?'}
+                      {rsvpResponse === "no"
+                        ? "Mulțumim pentru răspuns"
+                        : "Dansăm împreună în Mai?"}
                     </DialogTitle>
                     <DialogDescription className="mt-4">
-                      {rsvpResponse === 'no' 
-                        ? 'Ne pare rău că nu puteți participa, vă multumim pentru răspuns!'
-                        : 'Spune-ne dacă poți participa la evenimentul nostru!'
-                      }
+                      {rsvpResponse === "no"
+                        ? "Ne pare rău că nu puteți participa, vă multumim pentru răspuns!"
+                        : "Spune-ne dacă poți participa la evenimentul nostru!"}
                     </DialogDescription>
                   </DialogHeader>
-                  
-                  {rsvpResponse === 'initial' && (
+
+                  {rsvpResponse === "initial" && (
                     <div className="flex flex-col">
-                        <div>
-                        <label className="block text-sm font-medium mb-1">Nume</label>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Nume
+                        </label>
                         <input
                           type="text"
                           value={formData.name}
-                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
                           className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
                           placeholder="Numele dvs."
                           required
                         />
                       </div>
-                    <div className="flex gap-4 mt-6">
-                      <button 
-                        disabled={!formData.name}
-                        onClick={() => setRsvpResponse('yes')}
-                        className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
-                      >
-                        Da
-                      </button>
-                      <button 
-                        disabled={formData.name.trim() === ''}
-                        onClick={() => setRsvpResponse('no')}
-                        className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
-                      >
-                        Nu
-                      </button>
-                    </div>
+                      <div className="flex gap-4 mt-6">
+                        <button
+                          disabled={!formData.name}
+                          onClick={() => setRsvpResponse("yes")}
+                          className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
+                        >
+                          Da
+                        </button>
+                        <button
+                          disabled={formData.name.trim() === ""}
+                          onClick={handleNoAttending}
+                          className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
+                        >
+                          Nu
+                        </button>
+                      </div>
                     </div>
                   )}
 
-                  {rsvpResponse === 'yes' && (
+                  {rsvpResponse === "yes" && (
                     <div className="mt-6 space-y-4">
                       <div>
-                        <label className="block text-sm font-medium mb-1">Nume</label>
+                        <label className="block text-sm font-medium mb-1">
+                          Nume
+                        </label>
                         <input
                           type="text"
                           value={formData.name}
-                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
                           className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
                           placeholder="Numele dvs."
+                          required
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Numărul de persoane</label>
+                        <label className="block text-sm font-medium mb-1">
+                          Numărul de persoane
+                        </label>
                         <input
                           type="number"
                           value={formData.numberOfPersons}
-                          onChange={(e) => setFormData({...formData, numberOfPersons: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              numberOfPersons: e.target.value,
+                            })
+                          }
                           className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
                           placeholder="ex. 2"
                           min="1"
+                          required
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Pe ce melodie dansăm împreună?</label>
+                        <label className="block text-sm font-medium mb-1">
+                          Pe ce melodie dansăm împreună?
+                        </label>
                         <input
                           type="text"
                           value={formData.song}
-                          onChange={(e) => setFormData({...formData, song: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, song: e.target.value })
+                          }
                           className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
                           placeholder="Titlul și artistul"
+                          required
                         />
                       </div>
                       <DialogClose asChild>
-                      <button 
-                        onClick={handleSubmit}
-                        className="w-full mt-4 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
-                      >
-                        Trimite
-                      </button>
+                        <button
+                          onClick={handleSubmit}
+                          disabled={
+                            formData.name.trim() === "" ||
+                            formData.numberOfPersons.trim() === "" ||
+                            isNaN(Number(formData.numberOfPersons)) ||
+                            Number(formData.numberOfPersons) < 1 ||
+                            formData.song.trim() === ""
+                          }
+                          className="w-full mt-4 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
+                        >
+                          Trimite
+                        </button>
                       </DialogClose>
                     </div>
                   )}
                 </DialogContent>
-                </Dialog>
-              {/* <button className="mt-10 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition">
-                RSVP
-              </button> */}
+              </Dialog>
             </div>
           </div>
         </div>
-
       </div>
-
-
     </div>
   );
 }
