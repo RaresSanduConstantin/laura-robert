@@ -37,7 +37,7 @@ export default function Home() {
         <div className="absolute bg-[#fff4de] w-full h-screen  md:inset-0 "></div>
         <div className="absolute inset-0 bg-[url('/images/flori.svg')] bg-cover bg-center bg-no-repeat">
         {/* mask */}
-        <div className="absolute inset-0 bg-[#fff4de] flower-clip md:hidden"></div>
+        {/* <div className="absolute inset-0 bg-[#fff4de] flower-clip md:hidden"></div> */}
         </div>
 
         <div className="absolute text-center flex flex-col w-full h-screen uppercase">
