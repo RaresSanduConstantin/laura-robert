@@ -87,7 +87,7 @@ export default function Home() {
                 Ne face plăcere să vă invităm <br /> la sărbătoarea iubirii
                 noastre
               </p>
-              <h1 className="text-5xl md:text-8xl font-medium text-gray-800 mb-4">
+              <h1 className="text-5xl md:text-8xl font-medium text-gray-800 mb-2 mt-2">
                 Laura & <br /> Robert
               </h1>
             </div>
