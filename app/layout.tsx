@@ -12,19 +12,19 @@ const theseasons = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://laura-robert-3n29sfcny-raressanduconstantins-projects.vercel.app/'),
+  metadataBase: new URL('https://laura-robert.vercel.app/'),
   title: "Laura & Robert - Hai la nunta!",
   description: "Invitatie nunta Laura & Robert - 17 Mai 2025",
   openGraph: {
-    url: "https://laura-robert-3n29sfcny-raressanduconstantins-projects.vercel.app/",
-    images:[ '/opengraph-image.png'],
+    url: "https://laura-robert.vercel.app/",
+    images:[ '/opengraph-image.jpeg'],
     title: 'Laura & Robert - Hai la nunta!',
     description: 'Invitatie nunta Laura & Robert - 17 Mai 2025',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Laura & Robert - Hai la nunta!',
-    images: ['/opengraph-image.png'],
+    images: ['/opengraph-image.jpeg'],
   }
   
 };
