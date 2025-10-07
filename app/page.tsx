@@ -1,103 +1,160 @@
-import Image from "next/image";
+"use client"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose
+} from "@/components/ui/dialog"
+import { useState } from "react"
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [rsvpResponse, setRsvpResponse] = useState<'initial' | 'yes' | 'no'>('initial')
+  const [formData, setFormData] = useState({
+    name: '',
+    numberOfPersons: '',
+    song: ''
+  })
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const resetDialog = () => {
+    setRsvpResponse('initial')
+    setFormData({ name: '', numberOfPersons: '', song: '' })
+  }
+
+  const handleSubmit = () => {
+    // Handle form submission here
+    console.log('Form submitted:', formData)
+    // You can add your submission logic here
+
+  }
+
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="relative w-full h-screen  md:max-w-5xl mx-auto aspect-[3/4] overflow-hidden">
+        <div className="absolute bg-[#fff4de] w-full h-screen  md:inset-0 "></div>
+        <div className="absolute inset-0 bg-[url('/images/flori.svg')] bg-cover bg-center bg-no-repeat">
+        {/* mask */}
+        <div className="absolute inset-0 bg-[#fff4de] flower-clip md:hidden"></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="absolute text-center flex flex-col w-full h-screen uppercase">
+          <div className="h-screen text-black flex flex-col justify-around items-center py-12">
+            <div className="flex-1 flex flex-col justify-end">
+              <p className="text-lg md:text-3xl font-light">Ne face placere sa va invitam  <br /> la sarbatoarea iubirii noastre</p>
+              <h1 className="text-4xl md:text-8xl font-medium text-gray-800 mb-4 mt-8">
+                Laura & <br/> Robert
+              </h1>
+            </div>
+            
+            <div className="flex-1 flex flex-col justify-center">
+            <div className="w-full md:w-xl h-0.5 bg-[#cfa987] mx-auto mb-9" />
+              <p className="text-xl md:text-3xl">Alaturi de nasii nostri</p>
+              <h2 className="text-3xl md:text-5xl">Oana & Ionut</h2>
+              <p className="mt-10 mb-2 font-bold text-2xl md:text-3xl">17 mai 2025</p>
+            <div className="w-full md:w-xl  h-0.5 bg-[#cfa987] mx-auto mt-9" />
+            </div>
+            
+            
+            <div className="flex-1 flex flex-col justify-start">
+              <p className="text-xl md:text-3xl">Ceremonia Religioasa | 3 PM</p>
+              <p className="text-xl md:text-3xl">Petrecerea | 4:30 PM</p>
+              <p >
+                <button className='mt-2 px-6 py-2 border-2 border-black text-lg font-medium transition' >
+              <a href="https://maps.app.goo.gl/q4gStLihkbVpJ6kM7" target='_blank' className="text-xl font-bold"> Daimon Events, Bucuresti ←</a>
+            </button>
+              </p>
+              <Dialog onOpenChange={(open) => !open && resetDialog()}>
+                <DialogTrigger className="mt-6 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition">
+                  RSVP
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-lg">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl">
+                      {rsvpResponse === 'no' ? 'Multumim pentru raspuns' : 'Dansam impreuna in mai?'}
+                    </DialogTitle>
+                    <DialogDescription className="mt-4">
+                      {rsvpResponse === 'no' 
+                        ? 'Ne pare rau ca nu puteti participa, va multumim pentru raspuns'
+                        : 'Ne dorim ca toata lumea sa se simta confortabil si sa se bucure de aceasta zi speciala alaturi de noi.'
+                      }
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  {rsvpResponse === 'initial' && (
+                    <div className="flex gap-4 mt-6">
+                      <button 
+                        onClick={() => setRsvpResponse('yes')}
+                        className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
+                      >
+                        Da
+                      </button>
+                      <button 
+                        onClick={() => setRsvpResponse('no')}
+                        className="flex-1 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
+                      >
+                        Nu
+                      </button>
+                    </div>
+                  )}
+
+                  {rsvpResponse === 'yes' && (
+                    <div className="mt-6 space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Nume</label>
+                        <input
+                          type="text"
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
+                          placeholder="Numele dvs."
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Numarul de persoane</label>
+                        <input
+                          type="number"
+                          value={formData.numberOfPersons}
+                          onChange={(e) => setFormData({...formData, numberOfPersons: e.target.value})}
+                          className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
+                          placeholder="ex. 2"
+                          min="1"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Melodie preferata</label>
+                        <input
+                          type="text"
+                          value={formData.song}
+                          onChange={(e) => setFormData({...formData, song: e.target.value})}
+                          className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-black"
+                          placeholder="Melodia pe care ati dori sa o ascultati"
+                        />
+                      </div>
+                      <DialogClose asChild>
+                      <button 
+                        onClick={handleSubmit}
+                        className="w-full mt-4 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition hover:bg-black hover:text-white"
+                      >
+                        Trimite
+                      </button>
+                      </DialogClose>
+                    </div>
+                  )}
+                </DialogContent>
+                </Dialog>
+              {/* <button className="mt-10 px-6 py-2 border-2 border-black rounded-full text-lg font-medium transition">
+                RSVP
+              </button> */}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
   );
 }
