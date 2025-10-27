@@ -97,7 +97,7 @@ export default function Home() {
               <p className="text-lg md:text-3xl">Alături de nașii noștri</p>
               <h2 className="text-2xl md:text-5xl">Oana & Ionuț</h2>
               <p className="mt-10 mb-2 font-bold text-2xl md:text-3xl">
-                17 mai 2025
+                17 mai 2026
               </p>
               <div className="w-full md:w-xl  h-0.5 bg-[#cfa987] mx-auto" />
               <p className="text-xl md:text-3xl">Ceremonia Religioasă | 4 PM</p>
@@ -119,7 +119,7 @@ export default function Home() {
               </p>
               <Dialog onOpenChange={(open) => !open && resetDialog()}>
                 <DialogTrigger className="mt-6 py-2 border-2 px-0 w-7/8  border-black rounded-full text-lg font-medium transition">
-                  RSVP
+                Apasa aici pentru confirmare
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-lg">
                   <DialogHeader>
